@@ -110,8 +110,7 @@ def get_number_of_line():
 
     return lines
 
-def  main():
-    balance = deposit()
+def spin(balance):
     lines = get_number_of_line()
     while True:
         bet = get_bet()
@@ -126,8 +125,22 @@ def  main():
 
     slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
     print_slot_machine(slots)
-    winnings, winnings_lines= check_winnings(slots, lines, bet, symbol_value)
+    winnings, winnings_lines = check_winnings(slots, lines, bet, symbol_value)
     print(f"You won ${winnings}")
     print(f"You won on lines:", *winnings_lines)
+    return winnings_lines - total_bet
 
-main()
+def  main():
+    balance = deposit()
+    while True:
+        print(f"Current balance is ${balance}")
+        answer = input("Would you like to continue? (y/n) ").lower()
+        if answer != "y":
+            break
+        balance += spin()
+
+    print(f"YOu left with ${balance}")
+
+
+if __name__ == "__main__":
+    main()
