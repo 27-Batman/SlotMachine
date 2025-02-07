@@ -111,9 +111,12 @@ def get_number_of_line():
     return lines
 
 def  main():
+
     balance = deposit()
     lines = get_number_of_line()
-    while True:
+    is_running = True
+
+    while is_running:
         bet = get_bet()
         total_bet = bet * lines
 
@@ -129,7 +132,6 @@ def  main():
     winnings, winnings_lines = check_winnings(slots, lines, bet, symbol_value)
     print(f"You won ${winnings}")
     print(f"You won on lines:", *winnings_lines)
-
 
 if __name__ == "__main__":
     main()
